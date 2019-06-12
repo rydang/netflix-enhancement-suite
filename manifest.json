@@ -1,10 +1,13 @@
 {
-  "name": "Neftlix Enhancement Suite",
-  "version": "1.0",
-  "permissions": ["storage"],
-  "background": {
-    "scripts": ["main.js"],
-    "persistent": false
-  },
-  "manifest_version": 2
+  "name": "Netflix Enhancement Suite",
+  "version": "0.1",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.netflix.com/watch/*"
+      ],
+      "js": ["scrap.js"]
+    }
+  ]
 }
