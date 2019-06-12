@@ -1,0 +1,10 @@
+{
+  "name": "Neftlix Enhancement Suite",
+  "version": "1.0",
+  "permissions": ["storage"],
+  "background": {
+    "scripts": ["main.js"],
+    "persistent": false
+  },
+  "manifest_version": 2
+}
