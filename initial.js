@@ -1,17 +1,31 @@
 // ellipsize-text **** SELECT TITLE
 
-function getAuthors(showDetails, type, api_key) {
+function getRoles(actorIds, api_key) {
+  for(let i = 0; i < actorIds.length; i++) {
+    const person_id = actorIds[i];
+    fetch(`https://api.themoviedb.org/3/person/${person_id}/combined_credits?api_key=${api_key}`)
+    .then(response => response.json())
+    .then(parsedJson => {
+      console.log(parsedJson);
+    });
+  }
+}
+
+function getActors(showDetails, type, api_key) {
   fetch(`https://api.themoviedb.org/3/${type}/${showDetails['id']}/credits?api_key=${api_key}`)
   .then(response => response.json())
   .then(parsedJson => {
     const cast = [];
+    const castIds = [];
     for(let i = 0; i < parsedJson.cast.length; i += 1) {
       cast.push(parsedJson.cast[i]['name']);
+      castIds.push(parsedJson.cast[i]['id']);
     }
     chrome.storage.sync.set({mdb_cast: cast}, () => {
-      console.log('cast set: ', cast);
+      console.log('cast set: ', parsedJson.cast);
     })
-  })
+    getRoles(castIds, api_key);
+  });
 }
 
 function sendMDBRequest(title, type) {
@@ -29,7 +43,7 @@ function sendMDBRequest(title, type) {
       console.log('details set :', parsedJson.results[0]);
     });
 
-    getAuthors(showDetails, type, api_key);
+    getActors(showDetails, type, api_key);
 
     return (parsedJson.results[0]);
   })
