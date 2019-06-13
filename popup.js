@@ -1,4 +1,6 @@
 // whenever a picture is clicked
+// obtain roles from local storage
+// create text elements on popup
 function getRoles(actorId) {
   // actor roles
   chrome.storage.local.get([actorId], (result) => {
@@ -32,6 +34,12 @@ function getRoles(actorId) {
     document.body.appendChild(textContainer);
   });
 }
+
+// obtain details from local storage
+// obtain title
+// obtain actors
+// obtain roles
+// create text elements on popup
 
 function defaultPopup() {
   // movie details

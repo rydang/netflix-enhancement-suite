@@ -1,9 +1,4 @@
-// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//     chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
-//     //   console.log(response.farewell);
-//     });
-//   });
-
+// checks for when netflix tab is being refreshed
 chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
   chrome.tabs.executeScript(null,{file:"initial.js"});
 });
