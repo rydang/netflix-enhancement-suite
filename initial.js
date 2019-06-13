@@ -1,11 +1,12 @@
 // ellipsize-text **** SELECT TITLE
 
-function getRoles(actorIds, api_key) {
+function getRoles(actorIds, actorNames, api_key) {
   for(let i = 0; i < actorIds.length; i++) {
     const person_id = actorIds[i];
     fetch(`https://api.themoviedb.org/3/person/${person_id}/combined_credits?api_key=${api_key}`)
     .then(response => response.json())
     .then(parsedJson => {
+      // chrome.storage.sync.set({`${cast}_roles`: parsedJson.cast})
       console.log(parsedJson);
     });
   }
@@ -24,7 +25,7 @@ function getActors(showDetails, type, api_key) {
     chrome.storage.sync.set({mdb_cast: cast}, () => {
       console.log('cast set: ', parsedJson.cast);
     })
-    getRoles(castIds, api_key);
+    getRoles(castIds, cast, api_key);
   });
 }
 
