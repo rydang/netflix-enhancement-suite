@@ -37,7 +37,9 @@ function defaultPopup() {
       let div = document.createElement('div');
       div.classList.add('person')
       div.id = castMember['id'];
-      div.innerHTML = `<h4 id='${castMember['id']}'>${castMember.name} as ${castMember.character}</h4><img id='${castMember['id']}' src='${'http://image.tmdb.org/t/p/w185'+castMember['profile_path']}'>`
+      let picturePath = (castMember['profile_path'] !== null) ? 'http://image.tmdb.org/t/p/w185'+castMember['profile_path'] : 'default.jpg';
+      div.innerHTML = `<h4 id='${castMember['id']}'>${castMember.name} as ${castMember.character}</h4><img id='${castMember['id']}' src='${picturePath}'>`
+      
       // img.src = 'http://image.tmdb.org/t/p/w185'+parsedJson.cast[i]['profile_path']
       div.addEventListener('click', function(event) {
         getRoles(event.target.id);
