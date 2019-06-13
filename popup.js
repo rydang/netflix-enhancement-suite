@@ -36,7 +36,8 @@ function getRoles(actorId) {
 function defaultPopup() {
   // movie details
   chrome.storage.local.get(['mdb_details'], (result) => {
-    document.querySelector('#showTitle').innerText = result['mdb_details']['name'];
+    let title = result['mdb_details']['name'] || result['mdb_details']['title'];
+    document.querySelector('#showTitle').innerText = title;
   })
 
   // movie actors

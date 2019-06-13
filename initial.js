@@ -47,7 +47,9 @@ function sendMDBRequest(title, type) {
 }
 
 function start() {
-  fetch(`https://www.netflix.com/api/shakti/vc1c06d28/metadata?movieid=${window.location.pathname.match(/(?<=watch\/)(.*)/g)[0]}`, {
+  let id = window.location.pathname.match(/(?<=watch\/)(.*)/g);
+  if(id === null) return;
+  fetch(`https://www.netflix.com/api/shakti/vc1c06d28/metadata?movieid=${id[0]}`, {
     credentials: 'include'
   })
   .then((resp)=>{
