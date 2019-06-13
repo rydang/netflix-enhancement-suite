@@ -8,11 +8,19 @@ function getRoles(actorId) {
     
     document.querySelector('#roleHeading').innerText = 'Roles from other media:';
 
+    console.log(roles);
+
     roles.forEach(roleInfo => {
       const roleText = document.createElement('div');
-      const character = roleInfo['character'];
-      const title = roleInfo['title'];
-      if(title === "" || title === undefined || character === "" || character === undefined) {
+      let character = roleInfo['character'];
+      let title = roleInfo['title'];
+      if(character === "" || character === undefined) {
+        character = 'Extra';
+      }
+      if(title === "" || title === undefined) {
+        title = roleInfo['name'];
+      }
+      if(title === "" || title === undefined) {
         return;
       }
       roleText.innerHTML =`${character} from <b style='color: black'>${title}</b>`;
@@ -37,10 +45,9 @@ function defaultPopup() {
       let div = document.createElement('div');
       div.classList.add('person')
       div.id = castMember['id'];
+      let character = (castMember.character !== "") ? castMember.character : 'Extra';
       let picturePath = (castMember['profile_path'] !== null) ? 'http://image.tmdb.org/t/p/w185'+castMember['profile_path'] : 'default.jpg';
-      div.innerHTML = `<h4 id='${castMember['id']}'>${castMember.name} as ${castMember.character}</h4><img id='${castMember['id']}' src='${picturePath}'>`
-      
-      // img.src = 'http://image.tmdb.org/t/p/w185'+parsedJson.cast[i]['profile_path']
+      div.innerHTML = `<h4 id='${castMember['id']}'>${castMember.name} as ${character}</h4><img id='${castMember['id']}' src='${picturePath}'>`
       div.addEventListener('click', function(event) {
         getRoles(event.target.id);
       })
