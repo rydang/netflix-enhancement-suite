@@ -1,0 +1,12 @@
+#actors{
+    width: 50em;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row; 
+    background-image: linear-gradient(#56beff, #26abff);
+}
+
+.person{
+    margin: 10px;
+}
