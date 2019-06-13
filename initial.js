@@ -46,15 +46,19 @@ function sendMDBRequest(title, type) {
   })
 }
 
-fetch(`https://www.netflix.com/api/shakti/vc1c06d28/metadata?movieid=${window.location.pathname.match(/(?<=watch\/)(.*)/g)[0]}`, {
-  credentials: 'include'
-})
-.then((resp)=>{
-  return resp.json();
-})
-.then((jsonObj)=>{
-  sendMDBRequest(jsonObj.video.title,  jsonObj.video.type === 'movie' ? 'movie' : 'tv');
-});
+function start() {
+  fetch(`https://www.netflix.com/api/shakti/vc1c06d28/metadata?movieid=${window.location.pathname.match(/(?<=watch\/)(.*)/g)[0]}`, {
+    credentials: 'include'
+  })
+  .then((resp)=>{
+    return resp.json();
+  })
+  .then((jsonObj)=>{
+    sendMDBRequest(jsonObj.video.title,  jsonObj.video.type === 'movie' ? 'movie' : 'tv');
+  });
+}
+
+start();
 
 
 
